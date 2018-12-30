@@ -28,6 +28,12 @@ public class CloudSpawner : MonoBehaviour
         controlX = 0;
         SetMinAndMaxX();
         CreateClouds();
+        player = GameObject.Find("Player");
+    }
+
+    private void Start()
+    {
+        PositionThePlayer();
     }
 
     void SetMinAndMaxX()
@@ -57,11 +63,10 @@ public class CloudSpawner : MonoBehaviour
         Shuffle(clouds);
         //for first cloud
         float positionY = 0f;
-        Vector3 temp;
 
         for (int i = 0; i < clouds.Length; i++)
         {
-            temp = clouds[i].transform.position;
+            Vector3 temp = clouds[i].transform.position;
 
             temp.y = positionY;
             
@@ -91,6 +96,45 @@ public class CloudSpawner : MonoBehaviour
             clouds[i].transform.position = temp;
             //update positionY
             positionY -= distanceBetweenClouds;
+        }        
+    }
+
+    void PositionThePlayer()
+    {
+        //get references to clouds spawned
+        GameObject[] darkClouds = GameObject.FindGameObjectsWithTag("Deadly");
+        GameObject[] cloudsInGame = GameObject.FindGameObjectsWithTag("Cloud");
+        int tempIndex = 0;
+        for (int i = 0; i < darkClouds.Length; i++)
+        {
+            //swap dark cloud with regular cloud
+            if (darkClouds[i].transform.position.y == 0.0f)
+            {
+                Vector3 t = darkClouds[i].transform.position;
+                darkClouds[i].transform.position = new Vector3(
+                    cloudsInGame[tempIndex].transform.position.x,
+                    cloudsInGame[tempIndex].transform.position.y,
+                    cloudsInGame[tempIndex].transform.position.z
+                    );
+
+                cloudsInGame[tempIndex].transform.position = t;
+
+                tempIndex++;
+            }
         }
+
+        //position player on first cloud
+        Vector3 temp = cloudsInGame[0].transform.position;
+
+        for (int i = 0; i < cloudsInGame.Length; i++)
+        {
+            //check if first cloud is actually first
+            if (temp.y < cloudsInGame[i].transform.position.y)
+            {
+                temp = cloudsInGame[i].transform.position;
+            }
+        }
+        temp.y += 0.8f;
+        player.transform.position = temp;
     }
 } //Cloud spawner
