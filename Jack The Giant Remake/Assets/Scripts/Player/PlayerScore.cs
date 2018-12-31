@@ -41,6 +41,7 @@ public class PlayerScore : MonoBehaviour
                 scoreCount++;
                 previousPosition = transform.position;
             }
+            GamePlayController.instance.SetScore(scoreCount);
         }
     }
 
@@ -51,6 +52,10 @@ public class PlayerScore : MonoBehaviour
         {
             coinScore++;
             scoreCount += 200;
+
+            GamePlayController.instance.SetScore(scoreCount);
+            GamePlayController.instance.SetCoinScore(coinScore);
+
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
             collision.gameObject.SetActive(false);
         }
@@ -58,6 +63,10 @@ public class PlayerScore : MonoBehaviour
         {
             lifeScore++;
             scoreCount += 300;
+
+            GamePlayController.instance.SetScore(scoreCount);
+            GamePlayController.instance.SetLifeScore(lifeScore);
+
             AudioSource.PlayClipAtPoint(lifeClip, transform.position);
             collision.gameObject.SetActive(false);
         }
