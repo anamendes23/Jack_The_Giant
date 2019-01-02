@@ -52,6 +52,17 @@ public class GamePlayController : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void PlayerDiedRestartGame()
+    {
+        StartCoroutine(PlayerDiedRestart());
+    }
+
+    IEnumerator PlayerDiedRestart()
+    {
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene("GamePlay");
+    }
+
     public void SetScore(int score)
     {
         scoreText.text = score.ToString();

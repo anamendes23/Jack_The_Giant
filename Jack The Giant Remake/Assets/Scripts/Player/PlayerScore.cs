@@ -75,22 +75,22 @@ public class PlayerScore : MonoBehaviour
             cameraScript.moveCamera = false;
             countScore = false;
 
-            GamePlayController.instance.GameOverShowPanel(scoreCount, coinScore);
-
             //move player outside of the camera
             transform.position = new Vector3(500, 500, 0);
-            lifeScore--;            
+            lifeScore--;
+
+            GameManager.instance.CheckGameStatus(scoreCount, coinScore, lifeScore);
         }
         if(collision.tag == "Deadly")
         {
             cameraScript.moveCamera = false;
             countScore = false;
 
-            GamePlayController.instance.GameOverShowPanel(scoreCount, coinScore);
-
             //move player outside of the camera
             transform.position = new Vector3(500, 500, 0);
-            lifeScore--;            
+            lifeScore--;
+
+            GameManager.instance.CheckGameStatus(scoreCount, coinScore, lifeScore);
         }
     }
 }
