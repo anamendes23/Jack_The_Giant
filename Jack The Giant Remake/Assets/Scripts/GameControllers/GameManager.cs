@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
         MakeSingleton();
     }
 
+    private void Start()
+    {
+        InitializeVariables();
+    }
+
     private void OnLevelWasLoaded(int level)
     {
         if (SceneManager.GetActiveScene().name == "GamePlay")
@@ -42,6 +47,28 @@ public class GameManager : MonoBehaviour
                 PlayerScore.coinScore = 0;
                 PlayerScore.lifeScore = 2;
             }
+        }
+    }
+
+    void InitializeVariables()
+    {
+        if(!PlayerPrefs.HasKey("Game Initialized"))
+        {
+            GamePreferences.SetEasyDifficulty(0);
+            GamePreferences.SetEasyDifficultyCoinScore(0);
+            GamePreferences.SetEasyDifficultyHighScore(0);
+
+            GamePreferences.SetMediumDifficulty(1);
+            GamePreferences.SetMediumDifficultyCoinScore(0);
+            GamePreferences.SetMediumDifficultyHighScore(0);
+
+            GamePreferences.SetHardDifficulty(0);
+            GamePreferences.SetHardDifficultyCoinScore(0);
+            GamePreferences.SetHardDifficultyHighScore(0);
+
+            GamePreferences.SetMusicState(0);
+
+            PlayerPrefs.SetInt("Game Initialized", 1);
         }
     }
 
