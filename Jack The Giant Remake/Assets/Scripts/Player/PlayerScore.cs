@@ -70,18 +70,7 @@ public class PlayerScore : MonoBehaviour
             AudioSource.PlayClipAtPoint(lifeClip, transform.position);
             collision.gameObject.SetActive(false);
         }
-        if(collision.tag == "Bounds")
-        {
-            cameraScript.moveCamera = false;
-            countScore = false;
-
-            //move player outside of the camera
-            transform.position = new Vector3(500, 500, 0);
-            lifeScore--;
-
-            GameManager.instance.CheckGameStatus(scoreCount, coinScore, lifeScore);
-        }
-        if(collision.tag == "Deadly")
+        if(collision.tag == "Bounds" || collision.tag == "Deadly")
         {
             cameraScript.moveCamera = false;
             countScore = false;

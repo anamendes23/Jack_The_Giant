@@ -89,6 +89,39 @@ public class GameManager : MonoBehaviour
     {
         if(lifeScore < 0)
         {
+            if(GamePreferences.GetEasyDifficulty() == 1)
+            {
+                int highScore = GamePreferences.GetEasyDifficultyHighScore();
+                int coinHighScore = GamePreferences.GetEasyDifficultyCoinScore();
+
+                if (highScore < score)
+                    GamePreferences.SetEasyDifficultyHighScore(score);
+                if (coinHighScore < coinScore)
+                    GamePreferences.SetEasyDifficultyCoinScore(coinScore);
+            }
+
+            if (GamePreferences.GetMediumDifficulty() == 1)
+            {
+                int highScore = GamePreferences.GetMediumDifficultyHighScore();
+                int coinHighScore = GamePreferences.GetMediumDifficultyCoinScore();
+
+                if (highScore < score)
+                    GamePreferences.SetMediumDifficultyHighScore(score);
+                if (coinHighScore < coinScore)
+                    GamePreferences.SetMediumDifficultyCoinScore(coinScore);
+            }
+
+            if (GamePreferences.GetHardDifficulty() == 1)
+            {
+                int highScore = GamePreferences.GetHardDifficultyHighScore();
+                int coinHighScore = GamePreferences.GetHardDifficultyCoinScore();
+
+                if (highScore < score)
+                    GamePreferences.SetHardDifficultyHighScore(score);
+                if (coinHighScore < coinScore)
+                    GamePreferences.SetHardDifficultyCoinScore(coinScore);
+            }
+
             //game over
             gameStartedFromMenu = false;
             gameRestartedAfterPlayerDied = false;
