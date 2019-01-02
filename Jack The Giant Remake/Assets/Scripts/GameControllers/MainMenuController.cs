@@ -35,17 +35,20 @@ public class MainMenuController : MonoBehaviour
     {
         GameManager.instance.gameStartedFromMenu = true;
         GameManager.instance.gameRestartedAfterPlayerDied = false;
-        SceneManager.LoadScene("GamePlay");
+        //SceneManager.LoadScene("GamePlay");
+        SceneFader.instance.LoadLevel("GamePlay");
     }
 
     public void GoToHighScoreMenu()
     {
-        SceneManager.LoadScene("HighScore");
+        //SceneManager.LoadScene("HighScore");
+        SceneFader.instance.LoadLevel("HighScore");
     }
 
     public void GoToOptionsMenu()
     {
-        SceneManager.LoadScene("OptionsMenu");
+        //SceneManager.LoadScene("OptionsMenu");
+        SceneFader.instance.LoadLevel("OptionsMenu");
     }
 
     public void QuitGame()
